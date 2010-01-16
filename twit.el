@@ -366,9 +366,9 @@
 (defun twit-set-auth (user pass)
    "Set the http url authentication string from USER and PASS."
    (let ((old-http-storage
-          (assoc "twitter.com:80" (symbol-value url-basic-auth-storage)))
+          (assoc "api.twitter.com:80" (symbol-value url-basic-auth-storage)))
          (old-https-storage
-          (assoc "twitter.com:443" (symbol-value url-basic-auth-storage)))
+          (assoc "api.twitter.com:443" (symbol-value url-basic-auth-storage)))
          (auth-pair
           (cons "Twitter API"
                 (base64-encode-string (format "%s:%s" user pass)))))
@@ -379,8 +379,8 @@
        (set url-basic-auth-storage
             (delete old-https-storage (symbol-value url-basic-auth-storage))))
      (set url-basic-auth-storage
-          (cons (list "twitter.com:443" auth-pair)
-                (cons (list "twitter.com:80" auth-pair)
+          (cons (list "api.twitter.com:443" auth-pair)
+                (cons (list "api.twitter.com:80" auth-pair)
                       (symbol-value url-basic-auth-storage))))))
 
 ;;* custom helper auth
@@ -772,7 +772,7 @@ AS WELL.  Otherwise your primary login credentials may get wacked."
 ;;* const url
 (defconst twit-base-search-url "http://search.twitter.com")
 (defconst twit-base-url (concat twit-protocol "://api.twitter.com/1"))
-(defconst twit-secure-base-url (concat twit-protocol "://twitter.com"))
+(defconst twit-secure-base-url (concat twit-protocol "://api.twitter.com"))
 ;; statuses
 (defconst twit-update-url
   (concat twit-base-url "/statuses/update.xml"))
@@ -929,11 +929,11 @@ The value returned is the current buffer."
 This forms the very basic support for multi-user twittering.
 See the very end of this file for an example."
   `(let ((,url-basic-auth-storage
-          (list (list "twitter.com:80"
+         (list (list "api.twitter.com:80"
                       (cons "Twitter API"
                             (base64-encode-string
                              (format "%s:%s" ,user ,pass))))
-                (list "twitter.com:443"
+                (list "api.twitter.com:443"
                       (cons "Twitter API"
                             (base64-encode-string
                              (format "%s:%s" ,user ,pass))))))
