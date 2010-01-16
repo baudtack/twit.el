@@ -1,5 +1,5 @@
 ;;; Twit.el --- interface with twitter.com
-(defvar twit-version-number "0.3.10")
+(defvar twit-version-number "0.3.11")
 ;; Copyright (c) 2007 Theron Tlax
 ;;           (c) 2008-2009 Jonathan Arkell
 ;;           (c) 2010 Dave Kerschner (docgnome)
@@ -323,7 +323,8 @@
 ;;            the icon of the user who originally tweeted it
 ;;            users are prompted on attempting to retweet if they want
 ;;            to use the new style, a la TweetDeck
-
+;; - 0.3.11 - Migrated to the versioned api at api.twitter.com/1 (docgnome)
+;;            the api at twitter.com is deprecated
 ;;; TODO:
 ;; - remember style buffer posting.
 
@@ -770,7 +771,7 @@ AS WELL.  Otherwise your primary login credentials may get wacked."
 
 ;;* const url
 (defconst twit-base-search-url "http://search.twitter.com")
-(defconst twit-base-url (concat twit-protocol "://twitter.com"))
+(defconst twit-base-url (concat twit-protocol "://api.twitter.com/1"))
 (defconst twit-secure-base-url (concat twit-protocol "://twitter.com"))
 ;; statuses
 (defconst twit-update-url
